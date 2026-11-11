@@ -1,0 +1,41 @@
+<aside class="sidebar" id="sidebar">
+  <div class="brand-wrap">
+    <div class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32"><path d="M5 13h22M7 10c1-3 4-5 9-5s8 2 9 5M6 17h20M8 21h16M10 25h12M7 13v4m18-4v4"/></svg>
+    </div>
+    <div class="brand-text">
+      <h1>JAPZGRILL</h1>
+      <p>Restaurant Management System</p>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a href="/customer-dashboard" class="nav-link{{#if nav.dashboard}} active{{/if}}">
+      <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg></span>
+      <span>Dashboard</span>
+    </a>
+    <a href="/customers" class="nav-link{{#if nav.customers}} active{{/if}}">
+      <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 13h22M7 10c1-3 4-5 9-5s8 2 9 5M6 17h20M8 21h16M10 25h12M7 13v4m18-4v4"/></svg></span>
+      <span>Customer Management</span>
+    </a>
+    <a href="/customer-history" class="nav-link{{#if nav.history}} active{{/if}}">
+      <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3v7m4-7v7M5 10h8v2a4 4 0 0 1-4 4h0a4 4 0 0 1-4-4zm4 6v5m8-16c2 2 3 4 3 7v9m-3-16c-2 2-3 4-3 7"/></svg></span>
+      <span>Customer History</span>
+    </a>
+    <a href="/customer-reports" class="nav-link{{#if nav.reports}} active{{/if}}">
+      <span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 17V9m5 8V5m5 12v-6m5 6V7"/><path d="M4 20h16"/></svg></span>
+      <span>Customer Reports</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-profile">
+    <div class="profile-avatar">JM</div>
+    <div>
+      <strong>{{adminUser.username}}</strong>
+      <small>Administrator</small>
+    </div>
+    <form action="/logout" method="post" class="logout-form">
+      <button class="logout-btn" type="submit">Logout</button>
+    </form>
+  </div>
+</aside>

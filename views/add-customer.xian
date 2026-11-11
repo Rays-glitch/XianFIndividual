@@ -1,0 +1,84 @@
+{{> head }}
+<body>
+  <div class="page-shell">
+    {{> sidebar }}
+    <main class="main-panel">
+      {{> header }}
+
+      <section class="panel form-panel">
+        <div class="panel-header split-row">
+          <h3>Add New Customer</h3>
+          <a class="secondary-btn" href="/customers">Back to list</a>
+        </div>
+
+        <form class="customer-form" method="POST" action="/customers/create">
+          <div class="form-grid">
+            <div class="field-group">
+              <label>First Name</label>
+              <input type="text" name="first_name" value="{{customer.first_name}}" class="{{#if errors.first_name}}invalid{{/if}}" />
+              {{#if errors.first_name}}<small class="error-text">{{errors.first_name}}</small>{{/if}}
+            </div>
+            <div class="field-group">
+              <label>Last Name</label>
+              <input type="text" name="last_name" value="{{customer.last_name}}" class="{{#if errors.last_name}}invalid{{/if}}" />
+              {{#if errors.last_name}}<small class="error-text">{{errors.last_name}}</small>{{/if}}
+            </div>
+            <div class="field-group">
+              <label>Gender</label>
+              <select name="gender" class="{{#if errors.gender}}invalid{{/if}}">
+                <option value="">Select gender</option>
+                <option value="Male" {{#if (eq customer.gender "Male")}}selected{{/if}}>Male</option>
+                <option value="Female" {{#if (eq customer.gender "Female")}}selected{{/if}}>Female</option>
+                <option value="Other" {{#if (eq customer.gender "Other")}}selected{{/if}}>Other</option>
+              </select>
+              {{#if errors.gender}}<small class="error-text">{{errors.gender}}</small>{{/if}}
+            </div>
+            <div class="field-group">
+              <label>Birthday</label>
+              <input type="date" name="birthday" value="{{customer.birthday}}" class="{{#if errors.birthday}}invalid{{/if}}" />
+              {{#if errors.birthday}}<small class="error-text">{{errors.birthday}}</small>{{/if}}
+            </div>
+            <div class="field-group">
+              <label>Email Address</label>
+              <input type="email" name="email" value="{{customer.email}}" class="{{#if errors.email}}invalid{{/if}}" />
+              {{#if errors.email}}<small class="error-text">{{errors.email}}</small>{{/if}}
+            </div>
+            <div class="field-group">
+              <label>Contact Number</label>
+              <input type="text" name="phone" value="{{customer.phone}}" class="{{#if errors.phone}}invalid{{/if}}" />
+              {{#if errors.phone}}<small class="error-text">{{errors.phone}}</small>{{/if}}
+            </div>
+            <div class="field-group full-width">
+              <label>Complete Address</label>
+              <textarea name="address" rows="3" class="{{#if errors.address}}invalid{{/if}}">{{customer.address}}</textarea>
+              {{#if errors.address}}<small class="error-text">{{errors.address}}</small>{{/if}}
+            </div>
+            <div class="field-group">
+              <label>Customer Type</label>
+              <select name="customer_type" class="{{#if errors.customer_type}}invalid{{/if}}">
+                <option value="Regular" {{#if (eq customer.customer_type "Regular")}}selected{{/if}}>Regular</option>
+                <option value="VIP" {{#if (eq customer.customer_type "VIP")}}selected{{/if}}>VIP</option>
+              </select>
+              {{#if errors.customer_type}}<small class="error-text">{{errors.customer_type}}</small>{{/if}}
+            </div>
+            <div class="field-group">
+              <label>Account Status</label>
+              <select name="status" class="{{#if errors.status}}invalid{{/if}}">
+                <option value="Active" {{#if (eq customer.status "Active")}}selected{{/if}}>Active</option>
+                <option value="Inactive" {{#if (eq customer.status "Inactive")}}selected{{/if}}>Inactive</option>
+              </select>
+              {{#if errors.status}}<small class="error-text">{{errors.status}}</small>{{/if}}
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="primary-btn" type="submit">Save Customer</button>
+            <a href="/customers" class="secondary-btn">Cancel</a>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+  <script src="/js/customer.js"></script>
+</body>
+{{> footer }}

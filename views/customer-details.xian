@@ -1,0 +1,51 @@
+{{> head }}
+<body>
+  <div class="page-shell">
+    {{> sidebar }}
+    <main class="main-panel">
+      {{> header }}
+
+      <section class="panel details-panel">
+        <div class="profile-header">
+          <div class="profile-avatar large-avatar">{{customer.first_name.[0]}}{{customer.last_name.[0]}}</div>
+          <div>
+            <p class="page-kicker">Customer Code: {{customer.customer_code}}</p>
+            <h3>{{customer.first_name}} {{customer.last_name}}</h3>
+            <div class="inline-badges">
+              <span class="badge badge-type {{#if (eq customer.customer_type "VIP")}}badge-vip{{else}}badge-regular{{/if}}">{{customer.customer_type}}</span>
+              <span class="badge badge-status {{#if (eq customer.status "Active")}}badge-active{{else}}badge-inactive{{/if}}">{{customer.status}}</span>
+            </div>
+          </div>
+          <div class="action-stack">
+            <a class="secondary-btn" href="/customers/{{customer.id}}/edit">Edit Customer</a>
+            <form method="POST" action="/customers/{{customer.id}}/status" class="inline-form" data-confirm="{{#if (eq customer.status "Active")}}Deactivate{{else}}Reactivate{{/if}} customer">
+              <input type="hidden" name="status" value="{{#if (eq customer.status "Active")}}Inactive{{else}}Active{{/if}}" />
+              <button class="secondary-btn" type="submit">{{#if (eq customer.status "Active")}}Deactivate{{else}}Reactivate{{/if}}</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-item"><span>Email</span><strong>{{customer.email}}</strong></div>
+          <div class="detail-item"><span>Phone</span><strong>{{customer.phone}}</strong></div>
+          <div class="detail-item"><span>Gender</span><strong>{{customer.gender}}</strong></div>
+          <div class="detail-item"><span>Birthday</span><strong>{{formatDate customer.birthday}}</strong></div>
+          <div class="detail-item"><span>Address</span><strong>{{customer.address}}</strong></div>
+          <div class="detail-item"><span>Registration Date</span><strong>{{formatDate customer.createdAt}}</strong></div>
+          <div class="detail-item"><span>Last Updated</span><strong>{{formatDate customer.updatedAt}}</strong></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header split-row">
+          <h3>Customer Activity</h3>
+        </div>
+        <div class="empty-state-card">
+          <p>No POS or sales activity is connected for this customer yet. Customer transaction and purchase history will appear here once the integrated sales module is available.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="/js/customer.js"></script>
+</body>
+{{> footer }}

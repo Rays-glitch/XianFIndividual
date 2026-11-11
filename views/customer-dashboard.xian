@@ -1,0 +1,156 @@
+{{> head }}
+<body>
+  <div class="page-shell">
+    {{> sidebar }}
+    <main class="main-panel">
+      {{> header }}
+
+      <section class="stats-grid">
+        <article class="stat-card accent-green">
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M5 13h22M7 10c1-3 4-5 9-5s8 2 9 5M6 17h20M8 21h16M10 25h12M7 13v4m18-4v4M9 21v4m14-4v4"/></svg>
+          </div>
+          <div>
+            <p>Total Customers</p>
+            <h3>{{stats.total}}</h3>
+            <small>All registered customers</small>
+          </div>
+        </article>
+        <article class="stat-card accent-khaki">
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M9 5v8m4-8v8m-8 0h12v2c0 3-2 5-5 5h-2c-3 0-5-2-5-5v-2Zm6 15v6m-5 0h10"/><path d="M21 7c3 2 4 5 4 9v12m-4-21c-2 2-3 5-3 9"/></svg>
+          </div>
+          <div>
+            <p>New Customers</p>
+            <h3>{{stats.newThisMonth}}</h3>
+            <small>Signed up this month</small>
+          </div>
+        </article>
+        <article class="stat-card accent-dark">
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M5 10c2-3 5-5 10-5 4 0 7 2 9 5l3 4M27 14v-5m0 5h-5M27 22c-2 3-5 5-10 5-4 0-7-2-9-5l-3-4M5 18v5m0-5h5"/></svg>
+          </div>
+          <div>
+            <p>Returning Customers</p>
+            <h3>{{stats.returning}}</h3>
+            <small>Visited more than once</small>
+          </div>
+        </article>
+        <article class="stat-card accent-muted">
+          <div class="stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32"><path d="M5 13h22M7 10c1-3 4-5 9-5s8 2 9 5M6 17h20M8 21h16M10 25h12M7 13v4m18-4v4"/><path d="M13 18v2m6-2v2"/></svg>
+          </div>
+          <div>
+            <p>Inactive Customers</p>
+            <h3>{{stats.inactive}}</h3>
+            <small>Currently inactive</small>
+          </div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel chart-panel">
+          <div class="panel-header">
+            <h3>Customer Registration Trends</h3>
+          </div>
+          <canvas id="registrationChart"></canvas>
+        </article>
+
+        <article class="panel chart-panel">
+          <div class="panel-header">
+            <h3>Customer Type Distribution</h3>
+          </div>
+          <canvas id="typeChart"></canvas>
+        </article>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="panel-header split-row">
+          <h3>Recent Customer Registrations</h3>
+          <a class="primary-btn" href="/customers">View All Customers</a>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Customer Code</th>
+                <th>Customer Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Type</th>
+                <th>Registration Date</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#if recentCustomers.length}}
+                {{#each recentCustomers}}
+                  <tr>
+                    <td>{{this.customer_code}}</td>
+                    <td>{{this.first_name}} {{this.last_name}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.phone}}</td>
+                    <td><span class="badge badge-type {{#if (eq this.customer_type "VIP")}}badge-vip{{else}}badge-regular{{/if}}">{{this.customer_type}}</span></td>
+                    <td>{{formatDate this.createdAt}}</td>
+                    <td><span class="badge badge-status {{#if (eq this.status "Active")}}badge-active{{else}}badge-inactive{{/if}}">{{this.status}}</span></td>
+                    <td><a class="link-btn" href="/customers/{{this.id}}">View Details</a></td>
+                  </tr>
+                {{/each}}
+              {{else}}
+                <tr>
+                  <td colspan="8" class="empty-state">No registrations yet.</td>
+                </tr>
+              {{/if}}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="quick-actions">
+        <a class="primary-btn" href="/customers/add">Add New Customer</a>
+        <a class="secondary-btn" href="/customers">View All Customers</a>
+        <a class="secondary-btn" href="/customer-reports">Generate Customer Report</a>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="/js/customer.js"></script>
+  <script>
+    const registrationChart = new Chart(document.getElementById('registrationChart'), {
+      type: 'line',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+        datasets: [{
+          label: 'Registrations',
+          data: [8, 11, 14, 10, 19, 16],
+          borderColor: '#244C36',
+          backgroundColor: 'rgba(36, 76, 54, 0.12)',
+          tension: 0.35,
+          fill: true
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } }
+      }
+    });
+
+    const typeChart = new Chart(document.getElementById('typeChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Regular', 'VIP'],
+        datasets: [{
+          label: 'Customer Types',
+          data: [{{stats.regular}}, {{stats.vip}}],
+          backgroundColor: ['#244C36', '#C5B895']
+        }]
+      },
+      options: { responsive: true, maintainAspectRatio: false }
+    });
+  </script>
+</body>
+{{> footer }}

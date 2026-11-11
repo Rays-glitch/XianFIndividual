@@ -1,0 +1,64 @@
+{{> head }}
+<body>
+  <div class="page-shell">
+    {{> sidebar }}
+    <main class="main-panel">
+      {{> header }}
+
+      <section class="stats-grid three-up">
+        <article class="stat-card accent-green">
+          <p>Total Registered Customers</p>
+          <h3>{{report.totalCustomers}}</h3>
+        </article>
+        <article class="stat-card accent-khaki">
+          <p>New Registrations</p>
+          <h3>{{report.newThisMonth}}</h3>
+        </article>
+        <article class="stat-card accent-dark">
+          <p>Returning Customers</p>
+          <h3>{{report.returningCustomers}}</h3>
+        </article>
+        <article class="stat-card accent-muted">
+          <p>Active Customers</p>
+          <h3>{{report.activeCustomers}}</h3>
+        </article>
+        <article class="stat-card accent-green">
+          <p>Inactive Customers</p>
+          <h3>{{report.inactiveCustomers}}</h3>
+        </article>
+        <article class="stat-card accent-khaki">
+          <p>Regular / VIP</p>
+          <h3>{{report.regularCustomers}} / {{report.vipCustomers}}</h3>
+        </article>
+      </section>
+
+      <section class="panel page-panel">
+        <div class="panel-header split-row">
+          <h3>Report Filters</h3>
+          <div class="header-actions">
+            <button class="secondary-btn" type="button">Export CSV</button>
+            <button class="primary-btn" type="button">Print Report</button>
+          </div>
+        </div>
+
+        <form class="filter-bar compact-form" method="GET" action="/customer-reports">
+          <input type="date" name="dateFrom" value="{{filters.dateFrom}}" />
+          <input type="date" name="dateTo" value="{{filters.dateTo}}" />
+          <select name="customerType">
+            <option value="">All types</option>
+            <option value="Regular" {{#if (eq filters.customerType "Regular")}}selected{{/if}}>Regular</option>
+            <option value="VIP" {{#if (eq filters.customerType "VIP")}}selected{{/if}}>VIP</option>
+          </select>
+          <select name="status">
+            <option value="">All statuses</option>
+            <option value="Active" {{#if (eq filters.status "Active")}}selected{{/if}}>Active</option>
+            <option value="Inactive" {{#if (eq filters.status "Inactive")}}selected{{/if}}>Inactive</option>
+          </select>
+          <button class="secondary-btn" type="submit">Apply</button>
+        </form>
+      </section>
+    </main>
+  </div>
+  <script src="/js/customer.js"></script>
+</body>
+{{> footer }}

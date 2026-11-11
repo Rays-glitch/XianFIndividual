@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173a2b">
+  <title>{{title}}</title>
+  <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+  <main class="login-layout">
+    <section class="welcome-panel" aria-label="JAPZGRILL">
+      <a class="brand" href="/login" aria-label="JAPZGRILL admin">
+        <span class="brand-icon" aria-hidden="true">J</span>
+        <span>JAPZ<span class="brand-light">GRILL</span></span>
+      </a>
+      <div class="welcome-copy">
+        <p class="eyebrow">Restaurant Management System</p>
+        <h1>Good food.<br><span>Great business.</span></h1>
+        <p>Welcome back to your table. Sign in to manage your customers and keep the good things cooking.</p>
+      </div>
+      <div class="food-art" aria-hidden="true">
+        <span class="food-spark spark-one">✦</span>
+        <span class="food-spark spark-two">✦</span>
+        <div class="plate">
+          <div class="plate-food">
+            <span class="lettuce"></span>
+            <span class="burger"></span>
+            <span class="bun"></span>
+            <span class="sesame sesame-one"></span>
+            <span class="sesame sesame-two"></span>
+          </div>
+        </div>
+        <span class="food-label">MADE WITH HEART</span>
+      </div>
+      <p class="panel-footer">Fresh flavors, warm welcomes, every day.</p>
+    </section>
+
+    <section class="form-panel">
+      <div class="form-wrap">
+        <div class="mobile-brand">JAPZ<span>GRILL</span></div>
+        <div class="form-heading">
+          <span class="admin-badge"><span aria-hidden="true">✦</span> ADMIN PORTAL</span>
+          <h2>Welcome back</h2>
+          <p>Enter your administrator credentials to continue.</p>
+        </div>
+
+        {{#if error_msg.length}}
+          <div class="login-error" role="alert">{{error_msg.[0]}}</div>
+        {{/if}}
+
+        <form action="/login" method="post" class="login-form">
+          <input type="hidden" name="next" value="{{next}}">
+          <label for="username">Username</label>
+          <div class="input-wrap">
+            <span aria-hidden="true">◎</span>
+            <input id="username" name="username" type="text" autocomplete="username" placeholder="Enter your username" required autofocus>
+          </div>
+
+          <div class="password-label">
+            <label for="password">Password</label>
+            <span>Admin access only</span>
+          </div>
+          <div class="input-wrap">
+            <span aria-hidden="true">⌑</span>
+            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+          </div>
+
+          <button type="submit">Sign in to dashboard <span aria-hidden="true">→</span></button>
+        </form>
+
+        <p class="form-note"><span aria-hidden="true">●</span> Secure administrator sign-in</p>
+      </div>
+      <footer class="form-footer">© 2026 JAPZGRILL <span>·</span> Restaurant Management</footer>
+    </section>
+  </main>
+</body>
+</html>

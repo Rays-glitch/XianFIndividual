@@ -1,0 +1,50 @@
+<header class="topbar">
+  <div class="topbar-left">
+    <button class="menu-toggle" id="sidebarToggle" type="button" aria-label="Toggle navigation">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <div>
+      <p class="page-kicker">Customer Management</p>
+      <h2>{{ title }}</h2>
+    </div>
+  </div>
+
+  <div class="topbar-right">
+    <div class="search-box">
+      <span aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg></span>
+      <input type="text" placeholder="Search" />
+    </div>
+    <button class="icon-button" type="button" aria-label="Notifications">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9m-8 12h4"/></svg>
+    </button>
+    <div class="settings-menu">
+      <button class="icon-button" id="settingsToggle" type="button" aria-label="Accessibility settings" aria-expanded="false" aria-controls="settingsPanel" title="Accessibility settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 1.8z"/></svg>
+      </button>
+      <section class="settings-panel" id="settingsPanel" aria-labelledby="settingsTitle" hidden>
+        <h3 id="settingsTitle">Accessibility</h3>
+        <label class="settings-option" for="highContrast">
+          <span>High contrast</span>
+          <input id="highContrast" type="checkbox">
+        </label>
+        <div class="settings-option text-size-option">
+          <label for="textEnlargement">Text enlargement</label>
+          <output id="textEnlargementValue" for="textEnlargement">0%</output>
+          <input id="textEnlargement" type="range" min="0" max="100" step="10" value="0">
+        </div>
+      </section>
+    </div>
+    <div class="mini-profile">
+      <span class="mini-avatar">JM</span>
+      <span>Japz Management</span>
+    </div>
+    <div class="date-pill">{{date}}</div>
+  </div>
+</header>
+
+{{#if success_msg.length}}
+  <div class="flash success">{{success_msg.[0]}}</div>
+{{/if}}
+{{#if error_msg.length}}
+  <div class="flash error">{{error_msg.[0]}}</div>
+{{/if}}

@@ -1,0 +1,23 @@
+{{> head }}
+<body>
+  <div class="page-shell">
+    {{> sidebar }}
+    <main class="main-panel">
+      {{> header }}
+
+      <section class="panel page-panel">
+        <div class="panel-header split-row">
+          <h3>Customer History</h3>
+          <a class="secondary-btn" href="/customers">Back to Customers</a>
+        </div>
+
+        <div class="empty-state-card large-empty">
+          <h4>Transaction history unavailable</h4>
+          <p>{{emptyStateMessage}}</p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="/js/customer.js"></script>
+</body>
+{{> footer }}
